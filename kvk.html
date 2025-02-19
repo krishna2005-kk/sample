@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21st Birthday Countdown</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fce4ec;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-top: 50px;
+            color: #ff4081;
+        }
+
+        .countdown {
+            font-size: 2em;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .message {
+            font-size: 1.5em;
+            color: #ff6347;
+            margin-top: 30px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .celebrate-btn {
+            padding: 20px 40px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #ff6347;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 50px;
+            transition: background-color 0.3s;
+        }
+
+        .celebrate-btn:hover {
+            background-color: #e53e3e;
+        }
+
+        /* Simple fade-in animation for the message */
+        .show-message {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>🎉 21st Birthday Countdown 🎂</h1>
+
+    <div class="countdown" id="countdown"></div>
+
+    <div id="birthdayMessage" class="message">
+        🎉🎉 Happy 21st Birthday! 🎉🎉
+    </div>
+
+    <button class="celebrate-btn" id="celebrateButton" onclick="showBirthdayMessage()">Click to Celebrate 🎉</button>
+
+    <script>
+        // User's birthdate and 21st birthday date
+        const birthDate = new Date("2004-03-17");  // Replace with your birthdate
+        const twentyFirstBirthday = new Date(birthDate.getFullYear() + 21, birthDate.getMonth(), birthDate.getDate());  // User's 21st birthday
+
+        // Function to start the countdown
+        function updateCountdown() {
+            const now = new Date();
+            const timeRemaining = twentyFirstBirthday - now;
+
+            if (timeRemaining <= 0) {
+                document.getElementById("countdown").innerHTML = "🎉 It's your 21st birthday! 🎉";
+                document.getElementById("celebrateButton").style.display = "none";  // Hide the button once the birthday arrives
+                document.getElementById("birthdayMessage").classList.add("show-message");
+            } else {
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }
+        }
+
+        // Function to show the birthday message when the button is clicked
+        function showBirthdayMessage() {
+            const messageElement = document.getElementById("birthdayMessage");
+            messageElement.classList.add("show-message");
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>
